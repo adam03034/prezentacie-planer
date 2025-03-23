@@ -8,40 +8,40 @@ import { shouldPlayProject, getProjectPlaytime } from '../types'
 const projects = ref<Project[]>([])
 const currentTime = ref(new Date())
 
-// Aktualizácia času každú sekundu namiesto minúty
+// cas akt kazdu sekundu aby sa nam projekt aktualizoval aj bez refreshu stranky
 const updateCurrentTime = () => {
   currentTime.value = new Date()
 }
 
-// Použitie requestAnimationFrame pre plynulejšiu aktualizáciu času
+
 const startTimeUpdater = () => {
   updateCurrentTime()
   requestAnimationFrame(startTimeUpdater)
 }
 
-// Výpočet všetkých aktívnych projektov
+
 const activeProjects = computed(() => {
   return projects.value.filter(project => shouldPlayProject(project, currentTime.value))
 })
 
-// Pridanie nového projektu
+
 const addProject = (project: Project) => {
   projects.value.push(project)
   saveProjects()
 }
 
-// Odstránenie projektu
+
 const removeProject = (id: number) => {
   projects.value = projects.value.filter(p => p.id !== id)
   saveProjects()
 }
 
-// Uloženie projektov do localStorage
+// tu si to ulozime do local storage nech sa nam tie data nestratia
 const saveProjects = () => {
   localStorage.setItem('prezentacie-planer-projects', JSON.stringify(projects.value))
 }
 
-// Načítanie projektov z localStorage
+
 const loadProjects = () => {
   const savedProjects = localStorage.getItem('prezentacie-planer-projects')
   if (savedProjects) {
@@ -49,13 +49,13 @@ const loadProjects = () => {
   }
 }
 
-// Načítanie projektov pri spustení aplikácie a štart časovača
+
 onMounted(() => {
   loadProjects()
   startTimeUpdater()
 })
 
-// Formátovanie času pre zobrazenie
+
 const formatTime = (date: Date) => {
   return date.toLocaleTimeString('sk-SK', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
 }
