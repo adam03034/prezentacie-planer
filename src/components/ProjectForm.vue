@@ -10,7 +10,7 @@ const endTime = ref('')
 const days = ref<number[]>([])
 
 const addProject = () => {
-  // Validácia
+
   if (name.value.trim() === '') {
     alert('Zadajte názov projektu')
     return
@@ -39,7 +39,7 @@ const addProject = () => {
   
   emits('addProject', newProject)
   
-  // Vyčistenie formulára
+
   name.value = ''
   mode.value = 'continuous'
   startTime.value = ''
