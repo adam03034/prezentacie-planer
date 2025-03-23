@@ -5,19 +5,19 @@ import { shouldPlayProject } from '../types'
 
 const props = defineProps<{ 
   projects: Project[],
-  currentTime: Date  // Pridaný nový prop
+  currentTime: Date  
 }>()
 
 const emits = defineEmits(['removeProject'])
 
-// Formátovanie dní v týždni
+
 const formatDays = (days?: number[]) => {
   if (!days || days.length === 0) return 'Žiadne vybrané dni';
   const dayNames = ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota'];
   return days.map(day => dayNames[day]).join(', ');
 }
 
-// Zistenie, či je projekt aktívny v aktuálnom čase
+
 const isProjectActive = (project: Project) => {
   return shouldPlayProject(project, props.currentTime);
 }
