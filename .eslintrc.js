@@ -15,7 +15,7 @@ module.exports = {
     },
     plugins: ['@typescript-eslint'],
     rules: {
-      'no-undef': 'off', // Vypnutie pravidla no-undef pre script setup
+      'no-undef': 'off', 
     },
     globals: {
       defineProps: 'readonly',
